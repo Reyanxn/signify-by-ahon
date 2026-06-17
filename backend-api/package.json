@@ -1,0 +1,14 @@
+{
+  "name": "signify-by-ahon-api",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "express": "^4.21.0",
+    "cors": "^2.8.5",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.6.0",
+    "multer": "^1.4.5-lts.1",
+    "cloudinary": "^1.41.3"
+  }
+}
