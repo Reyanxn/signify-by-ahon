@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+@layer base {
+  body { @apply bg-white text-gray-900 font-sans; }
+  h1, h2, h3, h4 { @apply font-display; }
+}
+
+@layer components {
+  .btn-primary { @apply bg-primary-500 text-white px-8 py-3 hover:bg-primary-600 transition-colors font-medium uppercase tracking-wider text-sm; }
+  .btn-outline { @apply border-2 border-black text-black px-8 py-3 hover:bg-black hover:text-white transition-colors font-medium uppercase tracking-wider text-sm; }
+  .btn-white { @apply bg-white text-black px-8 py-3 hover:bg-gray-100 transition-colors font-medium uppercase tracking-wider text-sm; }
+  .section-title { @apply text-3xl md:text-4xl font-display font-bold text-center mb-2; }
+  .section-subtitle { @apply text-gray-500 text-center mb-10 text-sm uppercase tracking-widest; }
+  .input-field { @apply w-full border border-gray-300 px-4 py-3 focus:outline-none focus:border-black transition-colors bg-white text-sm; }
+}
+
+.swiper-pagination-bullet-active { background: #d4735e !important; }
+.swiper-button-next, .swiper-button-prev { color: #d4735e !important; }

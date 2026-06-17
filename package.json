@@ -1,0 +1,20 @@
+{
+  "name": "signify-by-ahon",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SIGNIFY BY AHON - Fashion E-Commerce Platform",
+  "scripts": {
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "build": "cd frontend && npm run build",
+    "deploy": "cd frontend && npm run build && cd .. && npx firebase-tools deploy --project signify-by-ahon",
+    "deploy:hosting": "npm run build && npx firebase-tools deploy --only hosting --project signify-by-ahon",
+    "seed": "cd backend && node seeder.js",
+    "setup": "npm install && cd backend && npm install && cd ../frontend && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0",
+    "firebase-tools": "^15.0.0"
+  }
+}
