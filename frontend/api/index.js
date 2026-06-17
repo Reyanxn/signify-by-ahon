@@ -4,7 +4,7 @@ const path = require('path');
 
 const connectDB = require('./config/db');
 const User = require('./models/User');
-const seedData = require('./seedData');
+const seedData = require('./config/seedData');
 
 let cachedDb = null;
 
