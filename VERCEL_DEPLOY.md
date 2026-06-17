@@ -1,6 +1,16 @@
-# Deploy to Vercel (Frontend) + Railway (Backend)
+# Deploy to Vercel (Frontend + Backend together)
 
-## Step 1: Deploy Frontend to Vercel
+This project is configured to deploy **both the frontend and backend** on Vercel in a single project.
+
+## Step 1: Get MongoDB Atlas (Free Database)
+
+1. Go to https://mongodb.com/atlas → Sign up
+2. Create a **free M0 cluster**
+3. Click **"Connect" → "Drivers"**
+4. Copy the connection string: `mongodb+srv://<user>:<password>@cluster.xxxxx.mongodb.net/signify-ahon`
+5. Replace `<user>` and `<password>` with your database user credentials
+
+## Step 2: Deploy on Vercel
 
 1. Go to https://vercel.com
 2. Click **"Add New" → "Project"**
@@ -10,50 +20,37 @@
    - **Root Directory**: `frontend/`
    - **Build Command**: `npm run build`
    - **Output Directory**: `.next`
-5. Click **"Deploy"**
+5. Click **"Deploy"** (build will fail initially — that's expected)
 
-Vercel will build and deploy the frontend automatically.
+## Step 3: Add Environment Variables
 
-## Step 2: Deploy Backend to Railway
+In your Vercel project dashboard → **Settings** → **Environment Variables**, add:
 
-1. Go to https://railway.app
-2. Click **"New Project" → "Deploy from GitHub repo"**
-3. Select `Reyanxn/signify-by-ahon`
-4. Set root directory to `backend/`
-5. Add these environment variables:
-   - `PORT=5000`
-   - `MONGODB_URI=mongodb+srv://...` (get free from https://mongodb.com/atlas)
-   - `JWT_SECRET=your_random_secret`
-   - `FRONTEND_URL=https://your-app.vercel.app`
-6. Railway will give you a URL like `https://signify-backend.up.railway.app`
+| Variable | Value |
+|----------|-------|
+| `MONGODB_URI` | Your MongoDB Atlas connection string |
+| `JWT_SECRET` | A random string (e.g., `mySuperSecretKey123!@#`) |
+| `JWT_EXPIRES_IN` | `30d` |
 
-## Step 3: Connect Frontend to Backend
+Then go to **Deployments**, find the failed deployment, click **"Redeploy"**.
 
-Update the API proxy URL. You have two options:
+## Step 4: Done!
 
-**Option A**: Update `frontend/vercel.json`:
-```json
-{
-  "rewrites": [
-    { "source": "/api/:path*", "destination": "https://your-backend.up.railway.app/api/:path*" }
-  ]
-}
-```
+- Your site: `https://signify-by-ahon.vercel.app`
+- Admin login: **admin@signifyahon.com** / **admin123**
+- First deployment auto-seeds sample data (12 products, 7 categories, 4 banners)
 
-**Option B**: Update `frontend/src/lib/api.js` to use the direct backend URL.
+## File Uploads (Optional)
 
-## Step 4: Set Vercel Environment Variables
+For image uploads to work in the admin panel, set up Cloudinary:
 
-In Vercel dashboard → Project Settings → Environment Variables:
-- `NEXT_PUBLIC_API_URL` = your Railway backend URL
+1. Free account at https://cloudinary.com
+2. Add these env vars on Vercel:
+   - `CLOUDINARY_CLOUD_NAME`
+   - `CLOUDINARY_API_KEY`
+   - `CLOUDINARY_API_SECRET`
 
-## Alternative: Deploy Everything on Vercel
-
-You can also deploy the backend as a Vercel Serverless Function:
-
-1. In Vercel project, go to Settings → Functions
-2. The `backend/` already has Express routes
-3. Vercel will detect `api/` routes automatically
+Without Cloudinary, uploads return base64 data URLs (functional but less efficient).
 
 ---
 
